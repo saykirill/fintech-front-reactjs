@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+const itsGood = 'It`s all good';
+const itsAlert = 'Reached max or -max';
 
 class App extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class App extends Component {
       init: 0, 
       max: 10, 
       count: 0, 
-      message: 'Reached max or -max'  
+      message: itsGood 
     };
   }
 
@@ -17,11 +19,14 @@ class App extends Component {
     let next = this.state.count + this.state.step;
     if ((next) <= this.state.max) {
       this.setState({
-        count: next
+        count: next,
+        message: itsGood
       });
     }
     else {
-      alert(this.state.message);
+      this.setState({
+        message: itsAlert
+      });
     }
   }
 
@@ -29,17 +34,21 @@ class App extends Component {
     let next = this.state.count - this.state.step;
     if ((next) >= -this.state.max) {
       this.setState({
-        count: next
+        count: next,
+        message: itsGood
       });
     }
     else {
-      alert(this.state.message);
+      this.setState({
+        message: itsAlert
+      });
     }
   }
 
   reset = () => {
     this.setState(state => ({
-      count: state.count = state.init
+      count: state.count = state.init,
+      message: itsGood
     }));
   }
 
@@ -77,7 +86,8 @@ class App extends Component {
               maxLength='10'
               value={this.state.step}
               onChange={this.changeStep}
-            /><br/>
+            />
+            <br/>
           <label>Init:    </label>
             <input
               type='number'
@@ -85,7 +95,8 @@ class App extends Component {
               maxLength='10'
               value={this.state.init}
               onChange={this.changeInit}
-            /><br/>
+            />
+            <br/>
           <label>Max:</label>
             <input
               type='number'
@@ -94,8 +105,10 @@ class App extends Component {
               maxLength='10'
               value={this.state.max}
               onChange={this.changeMax}
-            /><br/>
-          </form>
+            />
+            <br/>
+        </form>
+        <span id='alertMessage'>{this.state.message}</span>
       </div>
       );
   }
