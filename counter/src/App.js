@@ -4,16 +4,13 @@ const itsGood = 'It`s all good';
 const itsAlert = 'Reached max or -max';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { 
-      step: 1, 
-      init: 0, 
-      max: 10, 
-      count: 0, 
-      message: itsGood 
-    };
-  }
+  state = { 
+        step: 1, 
+        init: 0, 
+        max: 10, 
+        count: 0, 
+        message: itsGood 
+      };
 
   up = () => {
     let next = this.state.count + this.state.step;
